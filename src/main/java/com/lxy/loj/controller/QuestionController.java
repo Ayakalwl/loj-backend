@@ -10,10 +10,8 @@ import com.lxy.loj.common.ResultUtils;
 import com.lxy.loj.constant.UserConstant;
 import com.lxy.loj.exception.BusinessException;
 import com.lxy.loj.exception.ThrowUtils;
-import com.lxy.loj.model.dto.question.QuestionAddRequest;
-import com.lxy.loj.model.dto.question.QuestionEditRequest;
-import com.lxy.loj.model.dto.question.QuestionQueryRequest;
-import com.lxy.loj.model.dto.question.QuestionUpdateRequest;
+import com.lxy.loj.model.dto.question.*;
+import com.lxy.loj.model.dto.user.UserQueryRequest;
 import com.lxy.loj.model.entity.Question;
 import com.lxy.loj.model.entity.User;
 import com.lxy.loj.model.vo.QuestionVO;
@@ -30,8 +28,8 @@ import java.util.List;
 /**
  * 题目接口
  *
- * @author <a href="https://github.com/lilxy">程序员鱼皮</a>
- * @from <a href="https://lxy.icu">编程导航知识星球</a>
+ * @author Ayaka
+ * 
  */
 @RestController
 @RequestMapping("/question")
@@ -63,6 +61,14 @@ public class QuestionController {
         List<String> tags = questionAddRequest.getTags();
         if (tags != null) {
             question.setTags(JSONUtil.toJsonStr(tags));
+        }
+        List<JudgeCase> judgeCase = questionAddRequest.getJudgeCase();
+        if (judgeCase != null) {
+            question.setJudgeCase(JSONUtil.toJsonStr(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionAddRequest.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
         }
         questionService.validQuestion(question, true);
         User loginUser = userService.getLoginUser(request);
@@ -117,6 +123,14 @@ public class QuestionController {
         List<String> tags = questionUpdateRequest.getTags();
         if (tags != null) {
             question.setTags(JSONUtil.toJsonStr(tags));
+        }
+        List<JudgeCase> judgeCase = questionUpdateRequest.getJudgeCase();
+        if (judgeCase != null) {
+            question.setJudgeCase(JSONUtil.toJsonStr(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionUpdateRequest.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
         }
         // 参数校验
         questionService.validQuestion(question, false);
@@ -205,6 +219,7 @@ public class QuestionController {
         return ResultUtils.success(questionService.getQuestionVOPage(questionPage, request));
     }
 
+
     // endregion
     /**
      * 编辑（用户）
@@ -223,6 +238,14 @@ public class QuestionController {
         List<String> tags = questionEditRequest.getTags();
         if (tags != null) {
             question.setTags(JSONUtil.toJsonStr(tags));
+        }
+        List<JudgeCase> judgeCase = questionEditRequest.getJudgeCase();
+        if (judgeCase != null) {
+            question.setJudgeCase(JSONUtil.toJsonStr(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionEditRequest.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
         }
         // 参数校验
         questionService.validQuestion(question, false);

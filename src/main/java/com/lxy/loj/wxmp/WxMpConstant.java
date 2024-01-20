@@ -3,8 +3,8 @@ package com.lxy.loj.wxmp;
 /**
  * 微信公众号相关常量
  *
- * @author <a href="https://github.com/lilxy">程序员鱼皮</a>
- * @from <a href="https://lxy.icu">编程导航知识星球</a>
+ * @author Ayaka
+ * 
  **/
 public class WxMpConstant {
 

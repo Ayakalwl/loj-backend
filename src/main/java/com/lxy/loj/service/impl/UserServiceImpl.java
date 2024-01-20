@@ -30,8 +30,8 @@ import org.springframework.util.DigestUtils;
 /**
  * 用户服务实现
  *
- * @author <a href="https://github.com/lilxy">程序员鱼皮</a>
- * @from <a href="https://lxy.icu">编程导航知识星球</a>
+ * @author Ayaka
+ * 
  */
 @Service
 @Slf4j

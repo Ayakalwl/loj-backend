@@ -1,7 +1,11 @@
 package com.lxy.loj.model.vo;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lxy.loj.model.dto.question.JudgeConfig;
+import com.lxy.loj.model.entity.Question;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -52,7 +56,7 @@ public class QuestionVO implements Serializable {
     /**
      * 判题配置（json 对象）
      */
-    private String judgeConfig;
+    private JudgeConfig judgeConfig;
 
     /**
      * 点赞数
@@ -78,6 +82,54 @@ public class QuestionVO implements Serializable {
      * 更新时间
      */
     private Date updateTime;
+
+    /**
+     * 创建题目人信息
+     */
+    private UserVO userVO;
+
+    /**
+     * 包装类转对象
+     *
+     * @param questionVO
+     * @return
+     */
+    public static Question voToObj(QuestionVO questionVO) {
+        if (questionVO == null) {
+            return null;
+        }
+        Question question = new Question();
+        BeanUtils.copyProperties(questionVO, question);
+        List<String> tagList = questionVO.getTags();
+        if (tagList != null) {
+            question.setTags(JSONUtil.toJsonStr(tagList));
+        }
+
+        JudgeConfig voJudgeConfig = questionVO.getJudgeConfig();
+        if (voJudgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(voJudgeConfig));
+        }
+        return question;
+    }
+
+    /**
+     * 对象转包装类
+     *
+     * @param question
+     * @return
+     */
+    public static QuestionVO objToVo(Question question) {
+        if (question == null) {
+            return null;
+        }
+        QuestionVO questionVO = new QuestionVO();
+        BeanUtils.copyProperties(question, questionVO);
+        List<String> tagList = JSONUtil.toList(question.getTags(), String.class);
+        questionVO.setTags(tagList);
+        String judgeConfigStr = question.getJudgeConfig();
+        questionVO.setJudgeConfig(JSONUtil.toBean(judgeConfigStr, JudgeConfig.class));
+        return questionVO;
+    }
 
     private static final long serialVersionUID = 1L;
 }

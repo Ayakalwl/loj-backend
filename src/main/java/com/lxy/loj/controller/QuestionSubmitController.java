@@ -4,7 +4,7 @@ import com.lxy.loj.common.BaseResponse;
 import com.lxy.loj.common.ErrorCode;
 import com.lxy.loj.common.ResultUtils;
 import com.lxy.loj.exception.BusinessException;
-import com.lxy.loj.model.dto.postthumb.QuestionSubmitAddRequest;
+import com.lxy.loj.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.lxy.loj.model.entity.User;
 import com.lxy.loj.service.QuestionSubmitService;
 import com.lxy.loj.service.UserService;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 题目提交接口
  *
- * @author <a href="https://github.com/lilxy">程序员鱼皮</a>
- * @from <a href="https://lxy.icu">编程导航知识星球</a>
+ * @author Ayaka
+ * 
  */
 @RestController
 @RequestMapping("/question_submit")
@@ -35,23 +35,22 @@ public class QuestionSubmitController {
     private UserService userService;
 
     /**
-     * 点赞 / 取消点赞
+     * 提交题目
      *
      * @param questionSubmitAddRequest
      * @param request
-     * @return resultNum 本次点赞变化数
+     * @return 提交记录数 id
      */
     @PostMapping("/")
-    public BaseResponse<Integer> doThumb(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+    public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
             HttpServletRequest request) {
-        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getPostId() <= 0) {
+        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 登录才能点赞
+        // 登录才能提交
         final User loginUser = userService.getLoginUser(request);
-        long postId = questionSubmitAddRequest.getPostId();
-        int result = questionSubmitService.doQuestionSubmit(postId, loginUser);
-        return ResultUtils.success(result);
+        long questionSubmitId = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success(questionSubmitId);
     }
 
 }
