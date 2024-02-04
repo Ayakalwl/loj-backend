@@ -9,7 +9,6 @@ public class CodeSandboxProxy implements CodeSandbox {
 
     private final CodeSandbox codeSandbox;
 
-
     public CodeSandboxProxy(CodeSandbox codeSandbox) {
         this.codeSandbox = codeSandbox;
     }

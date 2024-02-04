@@ -8,7 +8,7 @@ import com.lxy.loj.judge.codesandbox.model.ExecuteCodeResponse;
  */
 public interface CodeSandbox {
     /**
-     * 只想代码
+     * 通用接口方法
      *
      *
      * @param executeCodeRequest

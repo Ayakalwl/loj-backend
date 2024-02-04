@@ -1,7 +1,6 @@
 package com.lxy.loj.judge;
 
 import com.lxy.loj.model.entity.QuestionSubmit;
-import com.lxy.loj.model.vo.QuestionSubmitVO;
 
 /**
  * 判题服务
@@ -12,6 +11,6 @@ public interface JudgeService {
      * @param questionSubmitId
      * @return
      */
-    QuestionSubmitVO doJudge(long questionSubmitId);
+    QuestionSubmit doJudge(long questionSubmitId);
 
 }
