@@ -4,7 +4,7 @@ import com.lxy.loj.judge.strategy.DefaultJudgeStrategy;
 import com.lxy.loj.judge.strategy.JavaLanguageJudgeStrategy;
 import com.lxy.loj.judge.strategy.JudgeContext;
 import com.lxy.loj.judge.strategy.JudgeStrategy;
-import com.lxy.loj.model.dto.questionsubmit.JudgeInfo;
+import com.lxy.loj.judge.codesandbox.model.JudgeInfo;
 import com.lxy.loj.model.entity.QuestionSubmit;
 import org.springframework.stereotype.Service;
 

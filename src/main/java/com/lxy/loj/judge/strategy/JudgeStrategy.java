@@ -1,6 +1,6 @@
 package com.lxy.loj.judge.strategy;
 
-import com.lxy.loj.model.dto.questionsubmit.JudgeInfo;
+import com.lxy.loj.judge.codesandbox.model.JudgeInfo;
 
 public interface JudgeStrategy {
 
