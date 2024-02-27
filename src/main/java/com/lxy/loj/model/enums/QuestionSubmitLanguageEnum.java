@@ -17,7 +17,9 @@ public enum QuestionSubmitLanguageEnum {
 
     CPLUSPLUS("cpp","cpp"),
 
-    GOLANG("go","go");
+    GOLANG("go","go"),
+
+    HTML("html","html");
 
     private final String text;
 

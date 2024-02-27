@@ -8,6 +8,7 @@ import com.lxy.loj.model.entity.Question;
 import com.lxy.loj.model.enums.JudgeInfoMessageEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 默认判题策略
@@ -21,8 +22,8 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy{
     @Override
     public JudgeInfo doJudge(JudgeContext judgeContext) {
         JudgeInfo judgeInfo = judgeContext.getJudgeInfo();
-        Long memory = judgeInfo.getMemory();
-        Long time = judgeInfo.getTime();
+        Long memory = Optional.ofNullable(judgeInfo.getMemory()).orElse(0L);
+        Long time = Optional.ofNullable(judgeInfo.getTime()).orElse(0L);
         List<String> inputList = judgeContext.getInputList();
         List<String> outputList = judgeContext.getOutputList();
         Question question = judgeContext.getQuestion();
@@ -31,8 +32,6 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy{
         JudgeInfo judgeInfo1Response = new JudgeInfo();
         judgeInfo1Response.setMemory(memory);
         judgeInfo1Response.setTime(time);
-
-
         // 先判断沙箱执行的结果输出数量是否和预期输出数量相等
         if (outputList.size() != inputList.size()) {
             judgeInfoMessageEnum = JudgeInfoMessageEnum.WRONG_ANSWER;
